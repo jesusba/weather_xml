@@ -14,10 +14,8 @@ for linea in f:
 	html += linea
 
 plantilla = Template(html)
-
-
 		
-ciudades = ["Almeria","Cadiz","Cordoba","Huelva","Jaen","Sevilla","Dos Hermanas"]
+ciudades = ["Almeria","Cadiz","Cordoba","Granada","Huelva","Jaen","Malaga","Sevilla","Dos Hermanas"]
 tempe_min = []
 tempe_max = []
 viento_vel = []
@@ -28,7 +26,7 @@ for ciudadp in ciudades:
 	respuesta = requests.get('http://api.openweathermap.org/data/2.5/weather',params=valores)
 	
 	raiz = etree.fromstring(respuesta.text.encode("utf-8"))	
-
+	
 	city = raiz.find("city")
 	city.attrib["name"]
 	tempemin = raiz.find("temperature")
@@ -38,7 +36,7 @@ for ciudadp in ciudades:
 	viento = raiz.find("wind/speed")
 	viento2 = round(float(viento.attrib["value"]),1)
 	direccion = raiz.find("wind/direction")
-	direccion2 = direccion.attrib["name"]
+	direccion2 = direccion.attrib["code"]
 	tempe_min.append(tempemin2)
 	tempe_max.append(tempemax2)
 	viento_vel.append(viento2)
